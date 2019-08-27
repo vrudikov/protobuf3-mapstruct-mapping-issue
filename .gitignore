@@ -1,0 +1,12 @@
+# Default ignored files
+/*.iws
+/*.iml
+/*.ipr
+
+# Project exclude paths
+/.gradle/
+/build/
+/build/classes/
+/build/classes/java/main/
+/build/extracted-include-protos/
+/build/resources/

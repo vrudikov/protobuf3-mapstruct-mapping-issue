@@ -1,0 +1,72 @@
+ext {
+    mapstruct = '1.3.0.Final'
+}
+
+buildscript {
+    ext {
+
+    }
+
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "net.ltgt.gradle:gradle-apt-plugin:0.19"
+        classpath "com.google.protobuf:protobuf-gradle-plugin:0.8.8"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: "net.ltgt.apt"
+apply plugin: "net.ltgt.apt-idea" // used to build mapstruct at windows
+apply plugin: 'com.google.protobuf'
+
+group = 'inc.blackhorse'
+description = "Protobuf 3 + Mapstruct Mapping issues"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+    jcenter()
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.7.1"
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.20.0'
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
+}
+
+sourceSets {
+    main {
+        proto {
+            srcDir "src/main/proto"
+        }
+        java {
+            srcDirs "src/main/java"
+            srcDirs "build/generated/source/proto/main/java"
+        }
+    }
+}
+
+dependencies {
+    compile("com.google.protobuf:protobuf-java:3.7.1")
+    compile("io.grpc:grpc-services:1.20.0")
+    compile("org.mapstruct:mapstruct-jdk8:${mapstruct}")
+    annotationProcessor("org.mapstruct:mapstruct-processor:${mapstruct}")
+}
