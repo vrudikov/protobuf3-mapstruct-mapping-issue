@@ -69,4 +69,6 @@ dependencies {
     compile("io.grpc:grpc-services:1.20.0")
     compile("org.mapstruct:mapstruct-jdk8:${mapstruct}")
     annotationProcessor("org.mapstruct:mapstruct-processor:${mapstruct}")
+
+    testCompile 'junit:junit:4.12'
 }
