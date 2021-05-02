@@ -10,3 +10,6 @@
 /build/classes/java/main/
 /build/extracted-include-protos/
 /build/resources/
+
+# IDE related directories
+.idea/

@@ -11,7 +11,7 @@ public interface SetObjectMapper {
 
     SetObjectMapper INSTANCE = Mappers.getMapper(SetObjectMapper.class);
 
-    @Mapping(target = "set1List", source = "set1")
-    @Mapping(target = "set2List", source = "set2")
+    @Mapping(target = "set1", source = "set1")
+    @Mapping(target = "set2", source = "set2")
     SetsHolder toGrpc(SetsHolderModel model);
 }
